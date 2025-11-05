@@ -2,12 +2,8 @@ pipeline {
     agent any
 
     environment {
-        AWS_DEFAULT_REGION = 'ap-south-1'                 // Replace with your AWS region
-        S3_BUCKET = 'rent-a-car-angular-deploy'          // Replace with your S3 bucket name
-    }
-
-    tools {
-        nodejs 'node18'                                  // NodeJS configured in Jenkins
+        AWS_DEFAULT_REGION = 'ap-south-1'
+        S3_BUCKET = 'rent-a-car-angular-deploy' // your S3 bucket name
     }
 
     stages {
@@ -31,11 +27,10 @@ pipeline {
 
         stage('Deploy to S3') {
             steps {
-                withAWS(credentials: 'aws-credentials-id', region: "${AWS_DEFAULT_REGION}") {
-                    sh '''
-                        aws s3 sync dist/rent-a-car-app/browser s3://$S3_BUCKET --delete
-                    '''
-                }
+                // Use your AWS CLI configured credentials
+                sh '''
+                    aws s3 sync dist/rent-a-car-app/browser s3://$S3_BUCKET --delete
+                '''
             }
         }
     }
