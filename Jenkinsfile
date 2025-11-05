@@ -4,10 +4,16 @@ pipeline {
         AWS_REGION = 'ap-south-1' // your S3 bucket region
         S3_BUCKET = 'rent-a-car-angular-deploy'
     }
-    stages {
-        stage('Checkout Code') {
-            steps {
-                git 'https://github.com/Adish1515/RentA-Car-FrontEnd-Angular.git'
+   stage('Checkout') {
+    steps {
+        checkout([$class: 'GitSCM',
+                  branches: [[name: '*/main']],
+                  doGenerateSubmoduleConfigurations: false,
+                  extensions: [],
+                  userRemoteConfigs: [[url: 'https://github.com/Adish1515/RentA-Car-FrontEnd-Angular.git']]])
+    }
+}
+
             }
         }
         stage('Install Dependencies') {
