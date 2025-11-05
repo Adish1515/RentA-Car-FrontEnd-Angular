@@ -26,7 +26,7 @@ pipeline {
 aws s3 sync dist\\rent-a-car-app\\ s3://rent-a-car-angular-deploy --delete
 '''
 
-'
+
             }
         }
     }
