@@ -22,8 +22,17 @@ pipeline {
 
         stage('Deploy to S3') {
             steps {
-                bat 'aws s3 sync dist/rent-a-car-app s3://YOUR_BUCKET_NAME --delete'
+                bat 'aws s3 sync dist/rent-a-car-app/ s3://rent-a-car-angular-deploy --delete'
             }
+        }
+    }
+
+    post {
+        failure {
+            echo "Build or deployment failed."
+        }
+        success {
+            echo "Deployment successful!"
         }
     }
 }
