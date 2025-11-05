@@ -22,7 +22,9 @@ pipeline {
 
         stage('Deploy to S3') {
             steps {
-                bat 'wsl aws s3 sync /mnt/c/Users/Adish/RentA-Car-FrontEnd-Angular/dist/rent-a-car-app/ s3://rent-a-car-angular-deploy --delete'
+               bat '''
+aws s3 sync dist\\rent-a-car-app\\ s3://rent-a-car-angular-deploy --delete
+'''
 
 '
             }
