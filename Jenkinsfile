@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         AWS_DEFAULT_REGION = 'ap-south-1'
-        S3_BUCKET = 'rent-a-car-angular-deploy' // your S3 bucket name
+        S3_BUCKET = 'rent-a-car-angular-deploy'
     }
 
     stages {
@@ -15,22 +15,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Build Angular App') {
             steps {
-                sh 'npm run build -- --configuration production'
+                bat 'npm run build -- --configuration production'
             }
         }
 
         stage('Deploy to S3') {
             steps {
-                // Use your AWS CLI configured credentials
-                sh '''
-                    aws s3 sync dist/rent-a-car-app/browser s3://$S3_BUCKET --delete
-                '''
+                bat 'aws s3 sync dist\\rent-a-car-app\\browser s3://%S3_BUCKET% --delete'
             }
         }
     }
