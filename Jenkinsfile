@@ -21,13 +21,13 @@ pipeline {
 
         stage('Build Angular App') {
             steps {
-                bat 'npm run build -- --configuration production'
+                sh 'npm run build -- --configuration production'
             }
         }
 
         stage('Deploy to S3') {
             steps {
-                bat 'aws s3 sync dist\\rent-a-car-app\\browser s3://%S3_BUCKET% --delete'
+                sh 'aws s3 sync dist\\rent-a-car-app\\browser s3://%S3_BUCKET% --delete'
             }
         }
     }
