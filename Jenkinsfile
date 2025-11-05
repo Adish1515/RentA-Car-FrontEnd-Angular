@@ -10,19 +10,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Build Angular App') {
             steps {
-                sh 'npm run build -- --configuration production'
+                bat 'npm run build -- --configuration production'
             }
         }
 
         stage('Deploy to S3') {
             steps {
-                sh 'aws s3 sync dist/rent-a-car-app s3://YOUR_BUCKET_NAME --delete'
+                bat 'aws s3 sync dist/rent-a-car-app s3://YOUR_BUCKET_NAME --delete'
             }
         }
     }
