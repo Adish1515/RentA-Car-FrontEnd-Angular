@@ -27,13 +27,10 @@ pipeline {
 
         stage('Deploy to S3') {
             steps {
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-credentials'
-                ]]) {
-                    sh '''
-                    echo "Uploading build files to S3..."
-                    aws s3 sync dist/rent-a-car-app/browser s3://$S3_BUCKET --delete
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                    bat '''
+                    echo Deploying to AWS S3...
+                    "C:\\Program Files\\Amazon\\AWSCLIV2\\aws.exe" s3 sync dist\\rent-a-car-app\\browser s3://rent-a-car-angular-deploy --delete
                     '''
                 }
             }
@@ -45,9 +42,10 @@ pipeline {
             echo "✅ Angular app successfully deployed to S3!"
         }
         failure {
-            echo "❌ Build failed!"
+            echo "❌ Build or deployment failed!"
         }
     }
 }
+
 
 
