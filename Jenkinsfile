@@ -15,13 +15,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Build Angular App') {
             steps {
-                sh 'npm run build -- --configuration production'
+                bat 'npm run build -- --configuration production'
             }
         }
 
@@ -49,4 +49,5 @@ pipeline {
         }
     }
 }
+
 
